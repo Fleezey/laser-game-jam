@@ -9,6 +9,7 @@ namespace Game.Turrets
     {
         [SerializeField] private float m_DurationTime;
         [SerializeField] private float m_TravelSpeed;
+        [SerializeField] private float m_Damage;
         [SerializeField] private LayerMask m_CollisionLayers;
 
         private float m_DurationLeft;
@@ -43,9 +44,14 @@ namespace Game.Turrets
                     float distanceLeft = traveledDistance - Vector3.Distance(hit.point, transform.position);
                     ReflectProjectile(hit, distanceLeft);
                 }
-                else if (hit.transform.gameObject.layer == LayerMask.NameToLayer("LivingEntity"))
+                else if (hit.transform.gameObject.CompareTag("Player"))
                 {
                     hit.transform.gameObject.GetComponent<PlayerEntity>().TakeDamage(1);
+                    Destroy(gameObject);
+                }
+                else if (hit.transform.gameObject.CompareTag("Enemy"))
+                {
+                    hit.transform.gameObject.GetComponent<EnemyEntity>().TakeDamage(1);
                     Destroy(gameObject);
                 }
                 else if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Obstacles"))

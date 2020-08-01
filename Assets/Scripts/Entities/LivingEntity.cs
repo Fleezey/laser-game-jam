@@ -9,7 +9,7 @@ namespace Game.Entities
         public float Health => m_Health;
         public float MaxHealth => m_MaxHealth;
 
-        public event Action m_onDeath;
+        public event Action m_onDeath = delegate { };
 
         protected bool m_IsDead;
         protected float m_Health;
@@ -46,8 +46,6 @@ namespace Game.Entities
             {
                 m_onDeath();
             }
-
-            Destroy(gameObject);
         }
     }
 }

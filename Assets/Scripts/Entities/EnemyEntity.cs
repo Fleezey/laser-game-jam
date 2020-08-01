@@ -2,7 +2,7 @@
 
 namespace Game.Entities
 {
-    public class PlayerEntity : LivingEntity
+    public class EnemyEntity : LivingEntity
     {
         protected override void Start()
         {
@@ -12,7 +12,7 @@ namespace Game.Entities
 
         private void OnDeath()
         {
-            Debug.Log("Game End");
+            Destroy(gameObject);
         }
     }
 }
