@@ -17,6 +17,9 @@ namespace Game.Turrets
         [SerializeField] private float m_Damage;
         [SerializeField] private LayerMask m_CollisionLayers;
 
+        [Header("Sound Effects")]
+        [SerializeField] private Audio.Sound m_ReflectSounds = null;
+
         private float m_DurationLeft;
 
 
@@ -54,6 +57,8 @@ namespace Game.Turrets
                     
                     transform.position = reflectedPoint.m_Position;
                     transform.LookAt(reflectedPoint.m_Direction);
+
+                    Audio.AudioManager.Instance.PlaySound(m_ReflectSounds.GetClip(), hit.point);
                 }
                 else if (hit.transform.gameObject.CompareTag("Player"))
                 {

@@ -22,6 +22,9 @@ namespace Game.Turrets
         [SerializeField] private float m_ChargeupTime = 0f;
         [SerializeField] private float m_CooldownTime = 0f;
 
+        [Header("Sound Effects")]
+        [SerializeField] private Audio.Sound m_ShotSounds = null;
+
 
         private void Start()
         {
@@ -41,15 +44,13 @@ namespace Game.Turrets
         {
             if (m_Target == null) return false;
 
+            float distance = Vector3.Distance(transform.position, m_Target.position);
+            if (distance > m_DetectionRadius) return false;
+
             Vector3 rayDirection = (m_Target.position - transform.position).normalized;
             RaycastHit hit;
 
-            if (Physics.Raycast(transform.position, rayDirection, out hit, m_DetectionRadius, m_CollisionLayers))
-            {
-                return hit.transform == m_Target;
-            }
-
-            return false;
+            return !Physics.Raycast(transform.position, rayDirection, out hit, m_DetectionRadius, m_CollisionLayers);
         }
 
         public void FireProjectile()
@@ -58,6 +59,8 @@ namespace Game.Turrets
 
             GameObject projectile = Instantiate(m_Projectile, m_CannonEnd.position, Quaternion.identity);
             projectile.transform.LookAt(GetTargetPosition());
+
+            Audio.AudioManager.Instance.PlaySound(m_ShotSounds.GetClip(), projectile.transform.position);
         }
 
         public void SetTarget(Transform t)

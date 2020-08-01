@@ -47,9 +47,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_DurationTime: 5
   m_TravelSpeed: 20
+  m_Damage: 0
   m_CollisionLayers:
     serializedVersion: 2
     m_Bits: 1792
+  m_ReflectSounds: {fileID: 11400000, guid: eef9b3d153eabf8409725761cb996c18, type: 2}
 --- !u!120 &2817914442961231638
 LineRenderer:
   m_ObjectHideFlags: 0
