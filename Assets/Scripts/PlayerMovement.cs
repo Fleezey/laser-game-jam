@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Game.Entities;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class PlayerMovement : MonoBehaviour{
+public class PlayerMovement : LivingEntity{
     public float speed;
     public float rotSpeed;
     // Shield cooldown?? Player state?
