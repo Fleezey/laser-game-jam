@@ -4,16 +4,16 @@ using UnityEngine;
 
 namespace Game.Turrets
 {
-    public class LaserProjectile : SimpleProjectile
+    public class LaserProjectile : MonoBehaviour
     {
         [SerializeField] private float m_DurationTime;
+        [SerializeField] private float m_TravelSpeed;
+        [SerializeField] private LayerMask m_CollisionLayers;
 
         private float m_DurationLeft;
 
-        protected override void Start()
+        private void Start()
         {
-            base.Start();
-
             m_DurationLeft = m_DurationTime;
         }
 
@@ -25,19 +25,33 @@ namespace Game.Turrets
             {
                 Destroy(gameObject);
             }
+
+            MoveProjectile(Time.fixedDeltaTime);
         }
 
-        private void OnTriggerEnter(Collider other)
+        private void MoveProjectile(float fixedDeltaTime)
         {
-            if (other.gameObject.tag == "Shield")
+            Vector3 rayDirection = transform.forward;
+            RaycastHit hit;
+            float traveledDistance = fixedDeltaTime * m_TravelSpeed;
+
+            if (Physics.Raycast(transform.position, rayDirection, out hit, traveledDistance, m_CollisionLayers))
             {
-                ReflectProjectile(other.transform.forward);
+                // Collision
+                gameObject.transform.position = hit.transform.position;
+                ReflectProjectile(hit.normal);
+            }
+            else
+            {
+                gameObject.transform.position += gameObject.transform.forward * traveledDistance;
             }
         }
 
         private void ReflectProjectile(Vector3 inNormal)
         {
-            m_Rigidbody.velocity = m_Rigidbody.velocity.magnitude* Vector3.Reflect(transform.forward, inNormal);
+            Vector3 heightCorrectedLookAt = Vector3.Reflect(gameObject.transform.forward, inNormal);
+            heightCorrectedLookAt.y = gameObject.transform.forward.y;
+            gameObject.transform.LookAt(heightCorrectedLookAt);
         }
     }
 }
