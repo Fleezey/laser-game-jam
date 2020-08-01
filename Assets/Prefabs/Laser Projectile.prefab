@@ -45,13 +45,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1562f7178307604897afd9d4ee9a6df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_CollisionLayers:
+    serializedVersion: 2
+    m_Bits: 1793
+  m_ReflectSounds: {fileID: 11400000, guid: eef9b3d153eabf8409725761cb996c18, type: 2}
   m_DurationTime: 5
   m_TravelSpeed: 20
   m_Damage: 0
-  m_CollisionLayers:
-    serializedVersion: 2
-    m_Bits: 1792
-  m_ReflectSounds: {fileID: 11400000, guid: eef9b3d153eabf8409725761cb996c18, type: 2}
 --- !u!120 &2817914442961231638
 LineRenderer:
   m_ObjectHideFlags: 0

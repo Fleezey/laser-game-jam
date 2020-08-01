@@ -59,6 +59,10 @@ namespace Game.Turrets
                 {
                     HandleShieldCollision(traveledDistance, hit);
                 }
+                else if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Bouncable"))
+                {
+                    HandleBouncableCollision(traveledDistance, rayDirection, hit);
+                }
                 else if (hit.transform.gameObject.CompareTag("Player"))
                 {
                     hit.transform.gameObject.GetComponent<PlayerEntity>().TakeDamage(1);
@@ -73,14 +77,22 @@ namespace Game.Turrets
                 {
                     Destroy(gameObject);
                 }
+                else
+                {
+                    HandleNoCollision(traveledDistance);
+                }
             }
             else
             {
-                Vector3 newPosition = transform.position + transform.forward * traveledDistance;
-                gameObject.transform.position += gameObject.transform.forward * traveledDistance;
+                HandleNoCollision(traveledDistance);
             }
 
             DistanceTraveled += traveledDistance;
+        }
+
+        private void HandleNoCollision(float traveledDistance)
+        {
+            gameObject.transform.position += gameObject.transform.forward * traveledDistance;
         }
 
         private void HandleShieldCollision(float traveledDistance, RaycastHit hit)
@@ -96,11 +108,31 @@ namespace Game.Turrets
                 Vector3 correctedDirection = (correctedPosition - reflectionStartPos).normalized;
                 ReflectionUtils.ReflectionPoint reflectedPoint = ReflectionUtils.CalculateReflectedPoint(reflectionStartPos, correctedDirection, distanceLeft);
 
-                transform.position = reflectedPoint.m_Position;
-                transform.LookAt(reflectedPoint.m_Direction);
+                UpdatedTransform(reflectedPoint);
 
-                Audio.AudioManager.Instance.PlaySound(m_ReflectSounds.GetClip(), hit.point);
+                PlayCollisionSound(hit.point);
             }
+        }
+
+        private void HandleBouncableCollision(float traveledDistance, Vector3 rayDirection, RaycastHit hit)
+        {
+            float distanceLeft = traveledDistance - Vector3.Distance(hit.point, transform.position);
+            ReflectionUtils.ReflectionPoint reflectedPoint = ReflectionUtils.CalculateReflectedPoint(hit.point, rayDirection, hit.normal, distanceLeft);
+
+            UpdatedTransform(reflectedPoint);
+
+            PlayCollisionSound(hit.point);
+        }
+
+        private void UpdatedTransform(ReflectionUtils.ReflectionPoint reflectedPoint)
+        {
+            transform.position = reflectedPoint.m_Position;
+            transform.LookAt(reflectedPoint.m_Direction);
+        }
+
+        private void PlayCollisionSound(Vector3 soundPosition)
+        {
+            Audio.AudioManager.Instance.PlaySound(m_ReflectSounds.GetClip(), soundPosition);
         }
     }
 }
