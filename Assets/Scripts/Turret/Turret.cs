@@ -60,6 +60,11 @@ namespace Game.Turrets
             projectile.transform.LookAt(GetTargetPosition());
         }
 
+        public void SetTarget(Transform t)
+        {
+            m_Target = t;
+        }
+
 
         private Vector3 GetTargetPosition()
         {
