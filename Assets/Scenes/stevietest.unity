@@ -442,8 +442,10 @@ MonoBehaviour:
   m_MaxHealth: 0
   speed: 4.5
   rotSpeed: 270
+  deploySpeed: 0
   controller: {fileID: 961429575}
   shieldMvtDebuff: 0.5
+  spawnerPrefab: {fileID: 0}
 --- !u!136 &961429571
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -513,7 +515,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 961429569}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.47, y: 1.421, z: -5.99}
+  m_LocalPosition: {x: -1.47, y: 1.421, z: 8.27}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 71722550}
