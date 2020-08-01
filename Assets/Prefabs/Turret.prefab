@@ -142,12 +142,12 @@ MonoBehaviour:
   m_Target: {fileID: 0}
   m_Head: {fileID: 4910977694228617550}
   m_CannonEnd: {fileID: 4910977694438448322}
-  m_Projectile: {fileID: 3160542878783176687, guid: bb839e11c31d3914b81ec210dcf3a690,
+  m_Projectile: {fileID: 4605375428528850821, guid: f69ee2a727bf0c347a34b27a60bb828b,
     type: 3}
   m_DetectionRadius: 100
   m_CollisionLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 1
   m_ChargeupTime: 0
   m_CooldownTime: 0.2
 --- !u!1 &4910977694438448333

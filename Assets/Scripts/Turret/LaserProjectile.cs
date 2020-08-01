@@ -17,16 +17,16 @@ namespace Game.Turrets
             m_DurationLeft = m_DurationTime;
         }
 
-        private void FixedUpdate()
+        private void LateUpdate()
         {
-            m_DurationLeft -= Time.fixedDeltaTime;
+            m_DurationLeft -= Time.deltaTime;
 
             if (m_DurationLeft < 0)
             {
                 Destroy(gameObject);
             }
 
-            MoveProjectile(Time.fixedDeltaTime);
+            MoveProjectile(Time.deltaTime);
         }
 
         private void MoveProjectile(float fixedDeltaTime)
@@ -38,7 +38,7 @@ namespace Game.Turrets
             if (Physics.Raycast(transform.position, rayDirection, out hit, traveledDistance, m_CollisionLayers))
             {
                 // Collision
-                float distanceLeft = traveledDistance - Vector3.Distance(hit.transform.position, gameObject.transform.position);
+                float distanceLeft = traveledDistance - Vector3.Distance(hit.point, transform.position);
                 ReflectProjectile(hit, distanceLeft);
             }
             else
@@ -51,9 +51,12 @@ namespace Game.Turrets
         {
             Vector3 directionAfterReflection = Vector3.Reflect(gameObject.transform.forward, hit.normal).normalized;
             Vector3 newPos = hit.point + directionAfterReflection * distance;
+            
+            Vector3 correctedPosition = new Vector3(newPos.x, transform.position.y, newPos.z);
+            Vector3 lookAtPosition = correctedPosition + (correctedPosition - hit.point).normalized * 1f;
 
-            gameObject.transform.position = newPos;
-            gameObject.transform.LookAt(newPos + directionAfterReflection * 1.0f);
+            transform.position = correctedPosition;
+            transform.LookAt(lookAtPosition);
         }
     }
 }
