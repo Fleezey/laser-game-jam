@@ -3,7 +3,12 @@ using UnityEngine.AI;
 
 public class EnemyMovement : MonoBehaviour
 {
-    [SerializeField] private Transform m_Target = null;
+    private Transform m_Target = null;
+
+    private void Start()
+    {
+        m_Target = GameObject.FindWithTag("Player").transform;
+    }
 
     private void Update()
     {
