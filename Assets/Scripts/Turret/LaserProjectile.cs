@@ -38,8 +38,8 @@ namespace Game.Turrets
             if (Physics.Raycast(transform.position, rayDirection, out hit, traveledDistance, m_CollisionLayers))
             {
                 // Collision
-                gameObject.transform.position = hit.transform.position;
-                ReflectProjectile(hit.normal);
+                float distanceLeft = traveledDistance - Vector3.Distance(hit.transform.position, gameObject.transform.position);
+                ReflectProjectile(hit, distanceLeft);
             }
             else
             {
@@ -47,11 +47,13 @@ namespace Game.Turrets
             }
         }
 
-        private void ReflectProjectile(Vector3 inNormal)
+        private void ReflectProjectile(RaycastHit hit, float distance)
         {
-            Vector3 heightCorrectedLookAt = Vector3.Reflect(gameObject.transform.forward, inNormal);
-            heightCorrectedLookAt.y = gameObject.transform.forward.y;
-            gameObject.transform.LookAt(heightCorrectedLookAt);
+            Vector3 directionAfterReflection = Vector3.Reflect(gameObject.transform.forward, hit.normal).normalized;
+            Vector3 newPos = hit.point + directionAfterReflection * distance;
+
+            gameObject.transform.position = newPos;
+            gameObject.transform.LookAt(newPos + directionAfterReflection * 1.0f);
         }
     }
 }
