@@ -12,19 +12,23 @@ namespace Game.Player{
 
         public CharacterController controller;
 
-        [Header("Component References")]
-        [SerializeField] private Animator m_Animator = null;
-        [Space()]
-
         // Movement debuff for player when bringing up shield
         // Should it be a flat or multiplicative debuff?
         [SerializeField] private float shieldMvtDebuff;
         [SerializeField] private GameObject spawnerPrefab;
         [SerializeField] private float m_GravityScale = 1f;
+        [SerializeField] private Shield m_Shield = null;
 
 
         private Camera m_cam;
         private bool m_turretActive;
+        private Animator m_Animator;
+
+
+        private void Awake()
+        {
+            m_Animator = GetComponent<Animator>();
+        }
 
         private void Start()
         {
@@ -97,6 +101,16 @@ namespace Game.Player{
                 }
             }
 
+        }
+
+        public void Anim_OnShieldArmed()
+        {
+            m_Shield.SetArmed(true);
+        }
+
+        public void Anim_OnShieldUnarmed()
+        {
+            m_Shield.SetArmed(false);
         }
     }
 }

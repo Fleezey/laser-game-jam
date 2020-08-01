@@ -102,7 +102,7 @@ namespace Game.Turrets
             Ray mouseCast = m_Camera.ScreenPointToRay(mousePos);
             if (Physics.Raycast(mouseCast, out var mouseHit, 100))
             {
-                Vector3 reflectionStartPos = hit.transform.gameObject.GetComponent<Shield>().ReflectionPosition.position;
+                Vector3 reflectionStartPos = hit.transform.gameObject.GetComponentInParent<Shield>().ReflectionPosition.position;
                 reflectionStartPos.y = hit.point.y;
                 Vector3 correctedPosition = new Vector3(mouseHit.point.x, hit.point.y, mouseHit.point.z);
                 Vector3 correctedDirection = (correctedPosition - reflectionStartPos).normalized;
