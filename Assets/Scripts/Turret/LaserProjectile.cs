@@ -1,5 +1,7 @@
 ﻿using Game.Entities;
-using System;
+using Game.Utils;
+
+using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -7,6 +9,9 @@ namespace Game.Turrets
 {
     public class LaserProjectile : MonoBehaviour
     {
+        public LayerMask CollisionLayers => m_CollisionLayers;
+        public float DistanceTraveled { get; private set; }
+
         [SerializeField] private float m_DurationTime;
         [SerializeField] private float m_TravelSpeed;
         [SerializeField] private float m_Damage;
@@ -14,12 +19,14 @@ namespace Game.Turrets
 
         private float m_DurationLeft;
 
+
         private void Start()
         {
             m_DurationLeft = m_DurationTime;
+            DistanceTraveled = 0f;
         }
 
-        private void LateUpdate()
+        private void Update()
         {
             m_DurationLeft -= Time.deltaTime;
 
@@ -30,6 +37,7 @@ namespace Game.Turrets
 
             MoveProjectile(Time.deltaTime);
         }
+
 
         private void MoveProjectile(float fixedDeltaTime)
         {
@@ -42,7 +50,10 @@ namespace Game.Turrets
                 if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Bouncable"))
                 {
                     float distanceLeft = traveledDistance - Vector3.Distance(hit.point, transform.position);
-                    ReflectProjectile(hit, distanceLeft);
+                    ReflectionUtils.ReflectionPoint reflectedPoint = ReflectionUtils.CalculateReflectedPoint(hit.point, rayDirection, hit.normal, distanceLeft);
+                    
+                    transform.position = reflectedPoint.m_Position;
+                    transform.LookAt(reflectedPoint.m_Direction);
                 }
                 else if (hit.transform.gameObject.CompareTag("Player"))
                 {
@@ -61,20 +72,11 @@ namespace Game.Turrets
             }
             else
             {
+                Vector3 newPosition = transform.position + transform.forward * traveledDistance;
                 gameObject.transform.position += gameObject.transform.forward * traveledDistance;
             }
-        }
 
-        private void ReflectProjectile(RaycastHit hit, float distance)
-        {
-            Vector3 directionAfterReflection = Vector3.Reflect(gameObject.transform.forward, hit.normal).normalized;
-            Vector3 newPos = hit.point + directionAfterReflection * distance;
-            
-            Vector3 correctedPosition = new Vector3(newPos.x, transform.position.y, newPos.z);
-            Vector3 lookAtPosition = correctedPosition + (correctedPosition - hit.point).normalized * 1f;
-
-            transform.position = correctedPosition;
-            transform.LookAt(lookAtPosition);
+            DistanceTraveled += traveledDistance;
         }
     }
 }
