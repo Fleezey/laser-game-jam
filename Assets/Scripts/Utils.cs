@@ -41,6 +41,16 @@ namespace Game.Utils
             return new ReflectionPoint(correctedPosition, lookAtPosition);
         }
 
+        public static ReflectionPoint CalculateReflectedPoint(Vector3 position, Vector3 outDirection, float distance)
+        {
+            Vector3 reflectedPosition = position + outDirection * distance;
+
+            Vector3 correctedPosition = new Vector3(reflectedPosition.x, position.y, reflectedPosition.z);
+            Vector3 lookAtPosition = correctedPosition + (correctedPosition - position).normalized * 1f;
+
+            return new ReflectionPoint(correctedPosition, lookAtPosition);
+        }
+
         public struct ReflectionPoint
         {
             public Vector3 m_Position;

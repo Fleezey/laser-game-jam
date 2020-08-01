@@ -2,7 +2,8 @@
 using UnityEngine;
 
 namespace Game.Player{
-    public class PlayerMovement : LivingEntity{
+    public class PlayerMovement : MonoBehaviour
+    {
         public float speed;
         public float rotSpeed;
 

@@ -17,11 +17,12 @@ namespace Game.Turrets
         [SerializeField] private float m_Damage;
         [SerializeField] private LayerMask m_CollisionLayers;
 
+        private Camera m_Camera;
         private float m_DurationLeft;
-
 
         private void Start()
         {
+            m_Camera = Camera.main;
             m_DurationLeft = m_DurationTime;
             DistanceTraveled = 0f;
         }
@@ -47,13 +48,9 @@ namespace Game.Turrets
 
             if (Physics.Raycast(transform.position, rayDirection, out hit, traveledDistance, m_CollisionLayers))
             {
-                if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Bouncable"))
+                if (hit.transform.gameObject.CompareTag("Shield"))
                 {
-                    float distanceLeft = traveledDistance - Vector3.Distance(hit.point, transform.position);
-                    ReflectionUtils.ReflectionPoint reflectedPoint = ReflectionUtils.CalculateReflectedPoint(hit.point, rayDirection, hit.normal, distanceLeft);
-                    
-                    transform.position = reflectedPoint.m_Position;
-                    transform.LookAt(reflectedPoint.m_Direction);
+                    HandleShieldCollision(traveledDistance, hit);
                 }
                 else if (hit.transform.gameObject.CompareTag("Player"))
                 {
@@ -77,6 +74,24 @@ namespace Game.Turrets
             }
 
             DistanceTraveled += traveledDistance;
+        }
+
+        private void HandleShieldCollision(float traveledDistance, RaycastHit hit)
+        {
+            float distanceLeft = traveledDistance - Vector3.Distance(hit.point, transform.position);
+            Vector3 mousePos = Input.mousePosition;
+            Ray mouseCast = m_Camera.ScreenPointToRay(mousePos);
+            if (Physics.Raycast(mouseCast, out var mouseHit, 100))
+            {
+                Vector3 reflectionStartPos = hit.transform.gameObject.GetComponent<Shield>().ReflectionPosition.position;
+                reflectionStartPos.y = hit.point.y;
+                Vector3 correctedPosition = new Vector3(mouseHit.point.x, hit.point.y, mouseHit.point.z);
+                Vector3 correctedDirection = (correctedPosition - reflectionStartPos).normalized;
+                ReflectionUtils.ReflectionPoint reflectedPoint = ReflectionUtils.CalculateReflectedPoint(reflectionStartPos, correctedDirection, distanceLeft);
+
+                transform.position = reflectedPoint.m_Position;
+                transform.LookAt(reflectedPoint.m_Direction);
+            }
         }
     }
 }
