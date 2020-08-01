@@ -12,13 +12,20 @@ namespace Game.Turrets
         public LayerMask CollisionLayers => m_CollisionLayers;
         public float DistanceTraveled { get; private set; }
 
+        [SerializeField] private LayerMask m_CollisionLayers;
+
+        [Header("Sound Effects")]
+        [SerializeField] private Audio.Sound m_ReflectSounds = null;
+
+        [Header("Projectile Properties")]
         [SerializeField] private float m_DurationTime;
         [SerializeField] private float m_TravelSpeed;
         [SerializeField] private float m_Damage;
-        [SerializeField] private LayerMask m_CollisionLayers;
 
         private Camera m_Camera;
+
         private float m_DurationLeft;
+
 
         private void Start()
         {
@@ -91,6 +98,8 @@ namespace Game.Turrets
 
                 transform.position = reflectedPoint.m_Position;
                 transform.LookAt(reflectedPoint.m_Direction);
+
+                Audio.AudioManager.Instance.PlaySound(m_ReflectSounds.GetClip(), hit.point);
             }
         }
     }
