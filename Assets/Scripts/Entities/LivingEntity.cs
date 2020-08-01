@@ -13,7 +13,7 @@ namespace Game.Entities
 
         protected bool m_IsDead;
         protected float m_Health;
-        protected float m_MaxHealth;
+        [SerializeField] protected float m_MaxHealth;
 
 
         protected virtual void Start()

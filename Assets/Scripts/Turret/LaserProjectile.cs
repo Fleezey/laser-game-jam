@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Game.Entities;
+using System;
 using UnityEngine;
 
 
@@ -37,9 +38,20 @@ namespace Game.Turrets
 
             if (Physics.Raycast(transform.position, rayDirection, out hit, traveledDistance, m_CollisionLayers))
             {
-                // Collision
-                float distanceLeft = traveledDistance - Vector3.Distance(hit.point, transform.position);
-                ReflectProjectile(hit, distanceLeft);
+                if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Bouncable"))
+                {
+                    float distanceLeft = traveledDistance - Vector3.Distance(hit.point, transform.position);
+                    ReflectProjectile(hit, distanceLeft);
+                }
+                else if (hit.transform.gameObject.layer == LayerMask.NameToLayer("LivingEntity"))
+                {
+                    hit.transform.gameObject.GetComponent<PlayerEntity>().TakeDamage(1);
+                    Destroy(gameObject);
+                }
+                else if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Obstacles"))
+                {
+                    Destroy(gameObject);
+                }
             }
             else
             {

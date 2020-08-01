@@ -110,4 +110,4 @@ MonoBehaviour:
   m_TravelSpeed: 20
   m_CollisionLayers:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 1792
