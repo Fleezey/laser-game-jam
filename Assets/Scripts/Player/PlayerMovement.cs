@@ -11,7 +11,6 @@ namespace Game.Player{
         // Shield cooldown?? Player state?
 
         public CharacterController controller;
-        public HealthBar healthBar;
 
 
         // Movement debuff for player when bringing up shield
@@ -25,10 +24,8 @@ namespace Game.Player{
         private bool m_turretActive;
         private Transform m_shield;
 
-        protected override void Start()
+        protected void Start()
         {
-            base.Start();
-            healthBar.SetMaxHealth(m_MaxHealth);
             m_shield = gameObject.transform.GetChild(0);
             m_shieldActive = false;
             m_turretActive = false;
@@ -83,12 +80,6 @@ namespace Game.Player{
                     transform.rotation = Quaternion.RotateTowards(transform.rotation, q, rotSpeed * Time.deltaTime);
                 }
             }
-        }
-
-        public override void TakeHit(float damage, Vector3 hitPoint, Vector3 hitDirection)
-        {
-            base.TakeHit(damage, hitPoint, hitDirection);
-            healthBar.SetHealth(m_Health);
         }
     }
 }

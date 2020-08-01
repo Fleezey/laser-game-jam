@@ -21,7 +21,11 @@ namespace Game.Entities
             m_Health = m_MaxHealth;
         }
 
-
+        public virtual void TakeHit(float damage)
+        {
+            // TODO: Could do something with the hit point, direction. Something like knockback
+            TakeDamage(damage);
+        }
         public virtual void TakeHit(float damage, Vector3 hitPoint, Vector3 hitDirection)
         {
             // TODO: Could do something with the hit point, direction. Something like knockback

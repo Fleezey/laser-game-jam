@@ -145,6 +145,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_MaxHealth: 1
+  scoreManager: {fileID: 1699539139762842031, guid: d4b0cb2c7a352f04bb6dcdc937bfce60,
+    type: 3}
 --- !u!54 &2827779823603286310
 Rigidbody:
   m_ObjectHideFlags: 0
