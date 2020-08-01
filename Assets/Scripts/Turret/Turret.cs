@@ -9,18 +9,18 @@ namespace Game.Turrets
         public float CooldownTime => m_CooldownTime;
 
         [Header("References")]
-        [SerializeField] private Transform m_Target;
-        [SerializeField] private Transform m_Head;
-        [SerializeField] private Transform m_CannonEnd;
-        [SerializeField] private GameObject m_Projectile;
+        [SerializeField] private Transform m_Target = null;
+        [SerializeField] private Transform m_Head = null;
+        [SerializeField] private Transform m_CannonEnd = null;
+        [SerializeField] private GameObject m_Projectile = null;
 
         [Header("Ray Properties")]
-        [SerializeField] private float m_DetectionRadius;
-        [SerializeField] private LayerMask m_CollisionLayers;
+        [SerializeField] private float m_DetectionRadius = 100f;
+        [SerializeField] private LayerMask m_CollisionLayers = -1;
 
         [Header("Timers")]
-        [SerializeField] private float m_ChargeupTime;
-        [SerializeField] private float m_CooldownTime;
+        [SerializeField] private float m_ChargeupTime = 0f;
+        [SerializeField] private float m_CooldownTime = 0f;
 
 
         private void Start()
@@ -30,12 +30,17 @@ namespace Game.Turrets
 
         public void Update()
         {
+            if (m_Target == null) return;
+
             m_Head.LookAt(GetTargetPosition());
             m_State.Update();
         }
 
+
         public bool HasLineOfSightWithTarget()
         {
+            if (m_Target == null) return false;
+
             Vector3 rayDirection = (m_Target.position - transform.position).normalized;
             RaycastHit hit;
 
@@ -49,6 +54,8 @@ namespace Game.Turrets
 
         public void FireProjectile()
         {
+            if (m_Target == null) return;
+
             GameObject projectile = Instantiate(m_Projectile, m_CannonEnd.position, Quaternion.identity);
             projectile.transform.LookAt(GetTargetPosition());
         }
