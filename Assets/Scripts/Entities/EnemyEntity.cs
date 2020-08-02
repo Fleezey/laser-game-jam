@@ -5,6 +5,8 @@ namespace Game.Entities
 {
     public class EnemyEntity : LivingEntity{
         public ScoreManager scoreManager;
+        [Header("Sound Effects")]
+        [SerializeField] private Audio.Sound m_HitSound = null;
         protected override void Start()
         {
             base.Start();
@@ -24,6 +26,7 @@ namespace Game.Entities
             if (collision.gameObject.CompareTag("Player"))
             {
                 collision.gameObject.GetComponent<PlayerEntity>().TakeHit(1);
+                Audio.AudioManager.Instance.PlaySound(m_HitSound.GetClip(), gameObject.transform.position);
                 scoreManager.AddScore(1);
                 OnDeath();
             }

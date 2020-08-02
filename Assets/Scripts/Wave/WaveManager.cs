@@ -14,10 +14,14 @@ namespace Game.Wave
         [SerializeField] private int m_InitialWaveSpawnDelay = 0;
         [SerializeField] private int m_EnemyCountDelayIncrement = 0;
         [SerializeField] private int m_WaveSpawnDelayDecrement = 0;
+        
+        [Header("Sound Effects")]
+        [SerializeField] private Audio.Sound m_StartSound = null;
 
         public Wave CurrentWave { get; private set; } = null;
         public bool WaveCompleted { get; private set; } = true;
-
+        public float NumWavesCompleted { get; private set; } = 0;
+        
         private GameObject[] m_SpawningPoint = null;
         private int m_EnemyDeathCount = 0;
 
@@ -78,8 +82,9 @@ namespace Game.Wave
             WaveCompleted = true;
             CurrentWave = new Wave(CurrentWave.EnemiesTotalCount + m_EnemyCountDelayIncrement,
                 Mathf.Max(0, CurrentWave.SpawnDelay - m_WaveSpawnDelayDecrement));
-
+            NumWavesCompleted++;
             Debug.Log("NEW WAVE INCOMING");
+            PlayRoundStartSound();
             StartCurrentWave();
         }
 
@@ -92,6 +97,16 @@ namespace Game.Wave
         private GameObject SpawnEnemy(Vector3 spawnPosition)
         {
             return Instantiate(m_Enemy, spawnPosition, Quaternion.identity);
+        }
+
+        public float GetNumRemainingEnemies()
+        {
+            return CurrentWave.EnemiesTotalCount - m_EnemyDeathCount;
+        }
+        
+        private void PlayRoundStartSound()
+        {
+            Audio.AudioManager.Instance.PlaySound(m_StartSound.GetClip(), Vector3.zero);
         }
     }
 }

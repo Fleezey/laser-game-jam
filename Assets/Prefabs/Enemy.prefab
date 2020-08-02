@@ -131,7 +131,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afb41fb5bf4672e42ab3e79d2f05be3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Target: {fileID: 0}
 --- !u!114 &675165451944956477
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -147,6 +146,7 @@ MonoBehaviour:
   m_MaxHealth: 1
   scoreManager: {fileID: 1699539139762842031, guid: d4b0cb2c7a352f04bb6dcdc937bfce60,
     type: 3}
+  m_HitSound: {fileID: 11400000, guid: 94b7b61d34b0a574d82f3b54282e76a4, type: 2}
 --- !u!54 &2827779823603286310
 Rigidbody:
   m_ObjectHideFlags: 0

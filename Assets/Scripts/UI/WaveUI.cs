@@ -9,6 +9,6 @@ public class WaveUI : MonoBehaviour{
 
     private void Update()
     {
-        waveText.text = "Current Wave: " + WaveManager.Instance.GetScore();
+        waveText.text = "Completed Waves: " + WaveManager.Instance.NumWavesCompleted +"\nEnemies remaining: " + WaveManager.Instance.GetNumRemainingEnemies();
     }
 }
