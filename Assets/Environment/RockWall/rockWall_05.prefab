@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6719521732226545549}
   - component: {fileID: 8837327045247730503}
   - component: {fileID: 4504064295813600489}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: rockWall_05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91,5 +91,5 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.4306407, y: 1.0166631, z: 0.3850666}
-  m_Center: {x: 0, y: 0.5083313, z: 0}
+  m_Size: {x: 1.4306407, y: 1.4621351, z: 0.3850666}
+  m_Center: {x: 0, y: 0.7310673, z: 0}

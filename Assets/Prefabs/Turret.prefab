@@ -183,7 +183,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4776011604136309780}
-  m_LocalRotation: {x: -0, y: -0.22440268, z: -0, w: 0.97449654}
+  m_LocalRotation: {x: 0, y: -0.22440678, z: 0, w: 0.97449565}
   m_LocalPosition: {x: 0.5817511, y: -0.48, z: -7.354648}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -213,8 +213,8 @@ MonoBehaviour:
   m_CollisionLayers:
     serializedVersion: 2
     m_Bits: 1792
-  m_ChargeupTime: 0.5
-  m_CooldownTime: 2
+  m_ChargeupTime: 0
+  m_CooldownTime: 1
   m_InitializationTime: 2
   m_ShotSounds: {fileID: 11400000, guid: 421f6fdc5bfd56b48b33974e83f363d0, type: 2}
 --- !u!1 &5658391324426504541

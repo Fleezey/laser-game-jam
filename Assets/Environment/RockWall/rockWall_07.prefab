@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 1649240523991288983}
   - component: {fileID: 2399464302531642162}
   - component: {fileID: 479751386313127928}
-  - component: {fileID: 4900736755452132147}
-  m_Layer: 0
+  - component: {fileID: 5942303636667588957}
+  m_Layer: 9
   m_Name: rockWall_07
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -80,7 +80,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &4900736755452132147
+--- !u!65 &5942303636667588957
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -91,5 +91,5 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.602817, y: 1.0927776, z: 0.36706626}
-  m_Center: {x: 0, y: 0.54638845, z: 0}
+  m_Size: {x: 1.602817, y: 1.7242293, z: 0.36706626}
+  m_Center: {x: 0, y: 0.8621143, z: 0}
