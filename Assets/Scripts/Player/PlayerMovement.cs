@@ -22,11 +22,9 @@ namespace Game.Player{
         private Camera m_cam;
         private bool m_shieldActive;
         private bool m_turretActive;
-        private Transform m_shield;
 
         protected void Start()
         {
-            m_shield = gameObject.transform.GetChild(0);
             m_shieldActive = false;
             m_turretActive = false;
             m_cam = Camera.main;
@@ -37,16 +35,14 @@ namespace Game.Player{
             float x = Input.GetAxis("Horizontal");
             float z = Input.GetAxis("Vertical");
             Vector3 move = Vector3.right * x + Vector3.forward * z;
-            controller.Move(move * speed * Time.deltaTime);
+            controller.Move(Vector3.Normalize(move) * speed * Time.deltaTime);
 
             if (Input.GetMouseButtonDown(0) && !m_shieldActive){
-                m_shield.Rotate(0, 0, 30);
                 m_shieldActive = true;
                 speed *= shieldMvtDebuff;
             }
 
             if (Input.GetMouseButtonUp(0) && m_shieldActive){
-                m_shield.Rotate(0, 0, -30);
                 m_shieldActive = false;
                 speed /= shieldMvtDebuff;
             }
