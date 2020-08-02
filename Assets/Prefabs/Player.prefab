@@ -169,7 +169,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 4.5
   rotSpeed: 270
-  deploySpeed: 0
+  deploySpeed: 20
   controller: {fileID: 9039854644208544389}
   shieldMvtDebuff: 0.5
   spawnerPrefab: {fileID: 0}
@@ -206,6 +206,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_MaxHealth: 3
+  healthBar: {fileID: 1754296356240285559, guid: 4d413f49ad0b0dc48abe0b8f60b16623,
+    type: 3}
 --- !u!95 &2672600660279771839
 Animator:
   serializedVersion: 3

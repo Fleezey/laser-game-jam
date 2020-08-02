@@ -147,9 +147,9 @@ MonoBehaviour:
   m_DetectionRadius: 100
   m_CollisionLayers:
     serializedVersion: 2
-    m_Bits: 1
-  m_ChargeupTime: 0
-  m_CooldownTime: 0.2
+    m_Bits: 1792
+  m_ChargeupTime: 0.5
+  m_CooldownTime: 0.5
   m_ShotSounds: {fileID: 11400000, guid: 421f6fdc5bfd56b48b33974e83f363d0, type: 2}
 --- !u!1 &4910977694438448333
 GameObject:
