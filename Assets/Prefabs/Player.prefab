@@ -206,6 +206,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_MaxHealth: 3
+  m_HitSounds: {fileID: 11400000, guid: a6803cfc85fedc14699fb92423f575fe, type: 2}
   healthBar: {fileID: 0}
 --- !u!95 &2672600660279771839
 Animator:

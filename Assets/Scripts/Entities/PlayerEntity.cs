@@ -5,6 +5,9 @@ namespace Game.Entities
 {
     public class PlayerEntity : LivingEntity
     {
+        [Header("Sound Effects")]
+        [SerializeField] private Audio.Sound m_HitSound = null;
+        
         public HealthBar healthBar;
         protected override void Start()
         {
@@ -14,6 +17,7 @@ namespace Game.Entities
         }
         public override void TakeDamage(float damage)
         {
+            Audio.AudioManager.Instance.PlaySound(m_HitSound.GetClip(), gameObject.transform.position);
             base.TakeDamage(damage);
             healthBar.SetHealth(m_Health);
         }
