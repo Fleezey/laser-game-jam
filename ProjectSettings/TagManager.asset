@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Shield
   - Enemy
+  - Spawning Point
   layers:
   - Default
   - TransparentFX

@@ -7,7 +7,6 @@ namespace Game.Wave
     public class WaveManager : Singleton<WaveManager>
     {
         [Header("References")]
-        [SerializeField] private Transform[] m_SpawningPoint = null;
         [SerializeField] private GameObject m_Enemy = null;
 
         [Header("Wave Properties")]
@@ -19,11 +18,14 @@ namespace Game.Wave
         public Wave CurrentWave { get; private set; } = null;
         public bool WaveCompleted { get; private set; } = true;
 
+        private GameObject[] m_SpawningPoint = null;
         private int m_EnemyDeathCount = 0;
+
 
         private void Start()
         {
             CurrentWave = new Wave(m_InitialWaveEnemyCount, m_InitialWaveSpawnDelay);
+            m_SpawningPoint = GameObject.FindGameObjectsWithTag("Spawning Point");
         }
 
         private void Update()
@@ -66,7 +68,7 @@ namespace Game.Wave
             for (uint i = 0; i < CurrentWave.EnemiesTotalCount; ++i)
             {
                 int spawnIndex = Random.Range(0, m_SpawningPoint.Length);
-                StartCoroutine(DelayedSpawnEnemy(cumulativeDelay, m_SpawningPoint[spawnIndex].position));
+                StartCoroutine(DelayedSpawnEnemy(cumulativeDelay, m_SpawningPoint[spawnIndex].transform.position));
                 cumulativeDelay += CurrentWave.SpawnDelay;
             }
         }
