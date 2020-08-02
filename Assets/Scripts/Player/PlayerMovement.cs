@@ -40,7 +40,6 @@ namespace Game.Player{
         {
             float x = Input.GetAxis("Horizontal");
             float z = Input.GetAxis("Vertical");
-
             float moveSpeed = speed;
 
             if (Input.GetMouseButtonDown(0)){
@@ -67,7 +66,7 @@ namespace Game.Player{
 
             Vector3 move = (Vector3.right * x + Vector3.forward * z) * moveSpeed;
             Vector3 gravity = Physics.gravity * m_GravityScale;
-            Vector3 targetVelocity = move + gravity;
+            Vector3 targetVelocity = Vector3.Normalize(move) + gravity;
             
             controller.Move(targetVelocity * Time.deltaTime);
             if (m_Animator != null)
