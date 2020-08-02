@@ -41,16 +41,7 @@ namespace Game.Player{
             float x = Input.GetAxis("Horizontal");
             float z = Input.GetAxis("Vertical");
 
-            Vector3 move = (Vector3.right * x + Vector3.forward * z) * speed;
-            Vector3 gravity = Physics.gravity * m_GravityScale;
-            Vector3 targetVelocity = move + gravity;
-
-            controller.Move(targetVelocity * Time.deltaTime);
-
-            if (m_Animator != null)
-            {
-                m_Animator.SetBool("IsRunning", move.magnitude > 0f);
-            }
+            float moveSpeed = speed;
 
             if (Input.GetMouseButtonDown(0)){
                 if (m_Animator != null) 
@@ -59,7 +50,7 @@ namespace Game.Player{
                     m_Animator.SetBool("IsBlocking", true);
                 }
 
-                speed *= shieldMvtDebuff;
+                moveSpeed = 0;
             }
 
             if (Input.GetMouseButtonUp(0)){
@@ -67,8 +58,21 @@ namespace Game.Player{
                 {
                     m_Animator.SetBool("IsBlocking", false);
                 }
+            }
 
-                speed /= shieldMvtDebuff;
+            if (Input.GetMouseButton(0))
+            {
+                moveSpeed = 0;
+            }
+
+            Vector3 move = (Vector3.right * x + Vector3.forward * z) * moveSpeed;
+            Vector3 gravity = Physics.gravity * m_GravityScale;
+            Vector3 targetVelocity = move + gravity;
+            
+            controller.Move(targetVelocity * Time.deltaTime);
+            if (m_Animator != null)
+            {
+                m_Animator.SetBool("IsRunning", move.magnitude > 0f);
             }
 
             Vector3 myPos = transform.position;
