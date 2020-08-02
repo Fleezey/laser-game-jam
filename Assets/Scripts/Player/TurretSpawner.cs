@@ -15,9 +15,8 @@ namespace Game.Player{
         {
             if (m_currTime <= 0.0f){
                 GameObject turret = Instantiate(turretPrefab, transform.position, Quaternion.Euler(0, 180, 0) * transform.rotation);
-                GameObject hero = GameObject.Find("Perceus");
-                if (hero != null)
-                    turret.GetComponent<Turret>().SetTarget(hero.transform);
+                GameObject player = GameObject.Find("Player");
+                turret.GetComponent<Turret>().SetTarget(player.transform);
                 Destroy(gameObject);
             }
             m_currTime -= Time.deltaTime;

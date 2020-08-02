@@ -30,7 +30,7 @@ namespace Game.Player{
             m_Animator = GetComponent<Animator>();
         }
 
-        private void Start()
+        protected void Start()
         {
             m_turretActive = false;
             m_cam = Camera.main;
@@ -100,7 +100,6 @@ namespace Game.Player{
                     transform.rotation = Quaternion.RotateTowards(transform.rotation, q, rotSpeed * Time.deltaTime);
                 }
             }
-
         }
 
         public void Anim_OnShieldArmed()
