@@ -12,9 +12,6 @@ namespace Game.Player{
 
         public CharacterController controller;
 
-        // Movement debuff for player when bringing up shield
-        // Should it be a flat or multiplicative debuff?
-        [SerializeField] private float shieldMvtDebuff;
         [SerializeField] private GameObject spawnerPrefab;
         [SerializeField] private float m_GravityScale = 1f;
         [SerializeField] private Shield m_Shield = null;
@@ -41,34 +38,44 @@ namespace Game.Player{
 
         void Update()
         {
+            float moveSpeed = speed;
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                if (m_Animator != null) 
+                {
+                    m_Animator.SetTrigger("TriggerBlock");
+                    m_Animator.SetBool("IsBlocking", true);
+                }
+
+                moveSpeed = 0f;
+            }
+
+            if (Input.GetMouseButton(0))
+            {
+                moveSpeed = 0f;
+            }
+
+            if (Input.GetMouseButtonUp(0))
+            {
+                if (m_Animator != null) 
+                {
+                    m_Animator.SetBool("IsBlocking", false);
+                }
+            }
+
             float x = Input.GetAxis("Horizontal");
             float z = Input.GetAxis("Vertical");
 
-            Vector3 move = (Vector3.right * x + Vector3.forward * z) * speed;
+            Vector3 move = (Vector3.right * x + Vector3.forward * z) * moveSpeed;
             Vector3 gravity = Physics.gravity * m_GravityScale;
-            Vector3 targetVelocity = Vector3.Normalize(move) + gravity;
+            Vector3 targetVelocity = move + gravity;
 
             controller.Move(targetVelocity * Time.deltaTime);
 
             if (m_Animator != null)
             {
                 m_Animator.SetBool("IsRunning", move.magnitude > 0f);
-            }
-
-            if (Input.GetMouseButtonDown(0)){
-                if (m_Animator != null) 
-                {
-                    m_Animator.SetTrigger("TriggerBlock");
-                    m_Animator.SetBool("IsBlocking", true);
-                }
-            }
-
-            if (Input.GetMouseButtonUp(0)){
-                if (m_Animator != null) 
-                {
-                    m_Animator.SetBool("IsBlocking", false);
-                }
-                speed /= shieldMvtDebuff;
             }
 
             Vector3 myPos = transform.position;
