@@ -110,13 +110,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3c4f6dad4127d74fa65a565cdc61c77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MaxHealth: 0
   speed: 4.5
   rotSpeed: 270
-  deploySpeed: 0
+  deploySpeed: 20
   controller: {fileID: 9039854644208544389}
   shieldMvtDebuff: 0.5
-  spawnerPrefab: {fileID: 0}
+  spawnerPrefab: {fileID: 1504979511690303766, guid: 9c80f7645e76d8d4a83239f5a8074fbd,
+    type: 3}
 --- !u!143 &9039854644208544389
 CharacterController:
   m_ObjectHideFlags: 0
@@ -148,6 +148,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_MaxHealth: 3
+  healthBar: {fileID: 1754296356240285559, guid: 4d413f49ad0b0dc48abe0b8f60b16623,
+    type: 3}
 --- !u!1 &9039854644393610487
 GameObject:
   m_ObjectHideFlags: 0
