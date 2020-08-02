@@ -12,22 +12,26 @@ namespace Game.Player{
 
         public CharacterController controller;
 
-
         // Movement debuff for player when bringing up shield
         // Should it be a flat or multiplicative debuff?
         [SerializeField] private float shieldMvtDebuff;
         [SerializeField] private GameObject spawnerPrefab;
+        [SerializeField] private float m_GravityScale = 1f;
+        [SerializeField] private Shield m_Shield = null;
 
 
         private Camera m_cam;
-        private bool m_shieldActive;
         private bool m_turretActive;
-        private Transform m_shield;
+        private Animator m_Animator;
+
+
+        private void Awake()
+        {
+            m_Animator = GetComponent<Animator>();
+        }
 
         protected void Start()
         {
-            m_shield = gameObject.transform.GetChild(0);
-            m_shieldActive = false;
             m_turretActive = false;
             m_cam = Camera.main;
         }
@@ -36,18 +40,34 @@ namespace Game.Player{
         {
             float x = Input.GetAxis("Horizontal");
             float z = Input.GetAxis("Vertical");
-            Vector3 move = Vector3.right * x + Vector3.forward * z;
-            controller.Move(move * speed * Time.deltaTime);
 
-            if (Input.GetMouseButtonDown(0) && !m_shieldActive){
-                m_shield.Rotate(0, 0, 30);
-                m_shieldActive = true;
+            Vector3 move = (Vector3.right * x + Vector3.forward * z) * speed;
+            Vector3 gravity = Physics.gravity * m_GravityScale;
+            Vector3 targetVelocity = move + gravity;
+
+            controller.Move(targetVelocity * Time.deltaTime);
+
+            if (m_Animator != null)
+            {
+                m_Animator.SetBool("IsRunning", move.magnitude > 0f);
+            }
+
+            if (Input.GetMouseButtonDown(0)){
+                if (m_Animator != null) 
+                {
+                    m_Animator.SetTrigger("TriggerBlock");
+                    m_Animator.SetBool("IsBlocking", true);
+                }
+
                 speed *= shieldMvtDebuff;
             }
 
-            if (Input.GetMouseButtonUp(0) && m_shieldActive){
-                m_shield.Rotate(0, 0, -30);
-                m_shieldActive = false;
+            if (Input.GetMouseButtonUp(0)){
+                if (m_Animator != null) 
+                {
+                    m_Animator.SetBool("IsBlocking", false);
+                }
+
                 speed /= shieldMvtDebuff;
             }
 
@@ -80,6 +100,16 @@ namespace Game.Player{
                     transform.rotation = Quaternion.RotateTowards(transform.rotation, q, rotSpeed * Time.deltaTime);
                 }
             }
+        }
+
+        public void Anim_OnShieldArmed()
+        {
+            m_Shield.SetArmed(true);
+        }
+
+        public void Anim_OnShieldUnarmed()
+        {
+            m_Shield.SetArmed(false);
         }
     }
 }
