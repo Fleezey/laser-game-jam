@@ -12,9 +12,9 @@ namespace Game.Entities
             healthBar.SetMaxHealth(m_MaxHealth);
             m_onDeath += OnDeath;
         }
-        public override void TakeHit(float damage)
+        public override void TakeDamage(float damage)
         {
-            base.TakeHit(damage);
+            base.TakeDamage(damage);
             healthBar.SetHealth(m_Health);
         }
 

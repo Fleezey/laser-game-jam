@@ -4,7 +4,6 @@ using Game.Wave;
 namespace Game.Entities
 {
     public class EnemyEntity : LivingEntity{
-        public ScoreManager scoreManager;
         protected override void Start()
         {
             base.Start();
@@ -23,8 +22,7 @@ namespace Game.Entities
         {
             if (collision.gameObject.CompareTag("Player"))
             {
-                collision.gameObject.GetComponent<PlayerEntity>().TakeHit(1);
-                scoreManager.AddScore(1);
+                collision.gameObject.GetComponent<PlayerEntity>().TakeDamage(1);
                 OnDeath();
             }
         }

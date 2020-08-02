@@ -5,11 +5,10 @@ using UnityEngine.UI;
 
 public class Score : MonoBehaviour{
     public Text scoreText;
-    public ScoreManager scoreManager;
 
     // Update is called once per frame
     void Update()
     {
-        scoreText.text = "Score: " + scoreManager.GetScore();
+        scoreText.text = "Score: " + ScoreManager.Instance.GetScore();
     }
 }

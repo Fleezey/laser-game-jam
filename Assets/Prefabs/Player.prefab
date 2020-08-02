@@ -206,8 +206,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_MaxHealth: 3
-  healthBar: {fileID: 1754296356240285559, guid: 4d413f49ad0b0dc48abe0b8f60b16623,
-    type: 3}
+  healthBar: {fileID: 0}
 --- !u!95 &2672600660279771839
 Animator:
   serializedVersion: 3
