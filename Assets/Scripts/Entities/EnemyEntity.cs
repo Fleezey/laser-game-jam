@@ -1,9 +1,15 @@
 ﻿using UnityEngine;
 using Game.Wave;
 
+
 namespace Game.Entities
 {
-    public class EnemyEntity : LivingEntity{
+    public class EnemyEntity : LivingEntity
+    {
+        [Header("Object References")]
+        [SerializeField] private Material[] m_SnakeMaterials = new Material[0];
+        [SerializeField] private GameObject m_SnakeModel = null;
+
         public ScoreManager scoreManager;
         [Header("Sound Effects")]
         [SerializeField] private Audio.Sound m_HitSound = null;
@@ -11,6 +17,10 @@ namespace Game.Entities
         {
             base.Start();
             m_onDeath += OnDeath;
+
+            m_SnakeModel.GetComponent<SkinnedMeshRenderer>().materials = new Material[] {
+                m_SnakeMaterials[Random.Range(0, m_SnakeMaterials.Length)]
+            };
         }
 
         private void OnDeath()

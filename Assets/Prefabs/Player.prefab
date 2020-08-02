@@ -118,8 +118,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.3240522, y: 4.3666806, z: 1.3477278}
-  m_Center: {x: -0.052779432, y: -1.6833314, z: -0.014025584}
+  m_Size: {x: 1.4726831, y: 4.3666806, z: 1.5359142}
+  m_Center: {x: -0.075929925, y: -1.6833258, z: 0.08006733}
 --- !u!1 &9039854644208544387
 GameObject:
   m_ObjectHideFlags: 0
@@ -149,7 +149,7 @@ Transform:
   m_GameObject: {fileID: 9039854644208544387}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.47, y: 1.421, z: 8.27}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.15, y: 1.15, z: 1.15}
   m_Children:
   - {fileID: 543450653532241398}
   m_Father: {fileID: 0}
@@ -171,7 +171,6 @@ MonoBehaviour:
   rotSpeed: 270
   deploySpeed: 20
   controller: {fileID: 9039854644208544389}
-  shieldMvtDebuff: 0
   spawnerPrefab: {fileID: 0}
   m_GravityScale: 1
   m_Shield: {fileID: 1637369462660728243}
@@ -205,8 +204,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdf1bcb4547035e49af42783d4b1e2a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MaxHealth: 3
-  m_HitSounds: {fileID: 11400000, guid: a6803cfc85fedc14699fb92423f575fe, type: 2}
+  m_MaxHealth: 10
+  m_HitSound: {fileID: 11400000, guid: a6803cfc85fedc14699fb92423f575fe, type: 2}
   healthBar: {fileID: 0}
 --- !u!95 &2672600660279771839
 Animator:
