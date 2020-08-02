@@ -12,7 +12,7 @@ namespace Game.Entities
 
         private void OnDeath()
         {
-            Debug.Log("Game End");
+            GameManager.Instance.GameOver();
         }
     }
 }

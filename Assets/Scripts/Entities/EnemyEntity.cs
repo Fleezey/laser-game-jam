@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Game.Wave;
 
 namespace Game.Entities
 {
@@ -12,6 +13,8 @@ namespace Game.Entities
 
         private void OnDeath()
         {
+            WaveManager.Instance.OnEnemyDeath();
+
             m_onDeath -= OnDeath;
             Destroy(gameObject);
         }
