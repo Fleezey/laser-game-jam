@@ -25,7 +25,7 @@ namespace Game.Turrets
         private Camera m_Camera;
 
         private float m_DurationLeft;
-
+        private int m_BouncesCount = 0;
 
         private void Start()
         {
@@ -55,6 +55,7 @@ namespace Game.Turrets
 
             if (Physics.Raycast(transform.position, rayDirection, out hit, traveledDistance, m_CollisionLayers))
             {
+                ++m_BouncesCount;
                 if (hit.transform.gameObject.CompareTag("Shield"))
                 {
                     HandleShieldCollision(traveledDistance, hit);
@@ -71,7 +72,7 @@ namespace Game.Turrets
                 else if (hit.transform.gameObject.CompareTag("Enemy"))
                 {
                     hit.transform.gameObject.GetComponent<EnemyEntity>().TakeDamage(1);
-                    ScoreManager.Instance.AddScore(1);
+                    ScoreManager.Instance.AddScore(1 << (m_BouncesCount - 1));
                     Destroy(gameObject);
                 }
                 else if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Obstacles"))
@@ -134,6 +135,11 @@ namespace Game.Turrets
         private void PlayCollisionSound(Vector3 soundPosition)
         {
             Audio.AudioManager.Instance.PlaySound(m_ReflectSounds.GetClip(), soundPosition);
+        }
+
+        private void OnDestroy()
+        {
+            m_BouncesCount = 0;
         }
     }
 }
