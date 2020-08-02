@@ -80,5 +80,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cca7768aaaea4b0081f14e7f9d4b5ad, type: 3}
   m_Name: NewFlatKitOutline
   m_EditorClassIdentifier: 
-  m_Active: 1
+  m_Active: 0
   settings: {fileID: 11400000, guid: df7b2471d5d8f554db9514b4a912e8e2, type: 2}
