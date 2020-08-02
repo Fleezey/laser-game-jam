@@ -58,8 +58,6 @@ namespace Game.Player{
                     m_Animator.SetTrigger("TriggerBlock");
                     m_Animator.SetBool("IsBlocking", true);
                 }
-
-                moveSpeed = 0;
             }
 
             if (Input.GetMouseButtonUp(0)){

@@ -13,4 +13,7 @@ MonoBehaviour:
   m_Name: LaserShot
   m_EditorClassIdentifier: 
   m_Clips:
-  - {fileID: 8300000, guid: d93166f7e8c1e0e47af87ff8d90205f9, type: 3}
+  - {fileID: 8300000, guid: f66f74118a0bb9f45b4655d2c67ecabd, type: 3}
+  - {fileID: 8300000, guid: ebd5e8c2f24e8404999cb3c3826a29cd, type: 3}
+  - {fileID: 8300000, guid: 46de12460c84a2741807ab25196eb58b, type: 3}
+  - {fileID: 8300000, guid: 6457e579f0e63564490d2896ef737b39, type: 3}
