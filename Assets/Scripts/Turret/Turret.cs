@@ -52,7 +52,7 @@ namespace Game.Turrets
             Vector3 rayDirection = (m_Target.position - transform.position).normalized;
             RaycastHit hit;
 
-            return !Physics.Raycast(transform.position, rayDirection, out hit, m_DetectionRadius, m_CollisionLayers);
+            return !Physics.Raycast(transform.position, rayDirection, out hit, distance, m_CollisionLayers);
         }
 
         public void FireProjectile()

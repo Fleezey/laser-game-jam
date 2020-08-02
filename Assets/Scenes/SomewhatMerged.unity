@@ -7769,6 +7769,11 @@ PrefabInstance:
       propertyPath: m_Target
       value: 
       objectReference: {fileID: 2142050343}
+    - target: {fileID: 5658391324379121607, guid: 9b8711ddc882b9e4d96357c8ea989c9a,
+        type: 3}
+      propertyPath: m_CooldownTime
+      value: 1.4765
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9b8711ddc882b9e4d96357c8ea989c9a, type: 3}
 --- !u!1 &893869241
@@ -11199,7 +11204,7 @@ PrefabInstance:
     - target: {fileID: 9039854644208544394, guid: c17dd32d6566edb48a353feebec4770c,
         type: 3}
       propertyPath: m_MaxHealth
-      value: 1000
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c17dd32d6566edb48a353feebec4770c, type: 3}
