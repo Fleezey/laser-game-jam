@@ -25,9 +25,9 @@ namespace Game.Entities
         {
             if (collision.gameObject.CompareTag("Player"))
             {
-                collision.gameObject.GetComponent<PlayerEntity>().TakeHit(1);
                 Audio.AudioManager.Instance.PlaySound(m_HitSound.GetClip(), gameObject.transform.position);
                 scoreManager.AddScore(1);
+                collision.gameObject.GetComponent<PlayerEntity>().TakeDamage(1);
                 OnDeath();
             }
         }

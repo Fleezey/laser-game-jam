@@ -71,6 +71,7 @@ namespace Game.Turrets
                 else if (hit.transform.gameObject.CompareTag("Enemy"))
                 {
                     hit.transform.gameObject.GetComponent<EnemyEntity>().TakeDamage(1);
+                    ScoreManager.Instance.AddScore(1);
                     Destroy(gameObject);
                 }
                 else if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Obstacles"))

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 
 namespace Game.Turrets
@@ -21,6 +22,7 @@ namespace Game.Turrets
         [Header("Timers")]
         [SerializeField] private float m_ChargeupTime = 0f;
         [SerializeField] private float m_CooldownTime = 0f;
+        [SerializeField] private float m_InitializationTime = 2f;
 
         [Header("Sound Effects")]
         [SerializeField] private Audio.Sound m_ShotSounds = null;
@@ -28,12 +30,12 @@ namespace Game.Turrets
 
         private void Start()
         {
-            SetState(new Idle(this));
+            StartCoroutine(InitializeTurret());
         }
 
         public void Update()
         {
-            if (m_Target == null) return;
+            if (m_Target == null || m_State == null) return;
 
             m_Head.LookAt(GetTargetPosition());
             m_State.Update();
@@ -74,6 +76,12 @@ namespace Game.Turrets
             Vector3 heightCorrectedPosition = m_Target.position;
             heightCorrectedPosition.y = m_Head.position.y;
             return heightCorrectedPosition;
+        }
+
+        private IEnumerator InitializeTurret()
+        {
+            yield return new WaitForSeconds(m_InitializationTime);
+            SetState(new Idle(this));
         }
     }
 }
