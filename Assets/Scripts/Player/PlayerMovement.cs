@@ -19,6 +19,9 @@ namespace Game.Player{
         [SerializeField] private float m_GravityScale = 1f;
         [SerializeField] private Shield m_Shield = null;
 
+        [Header("Crosshairs stuff")]
+        [SerializeField] private Transform m_Crosshairs = null;
+        [SerializeField] private Transform m_CrosshairsHeight = null;
 
         private Camera m_cam;
         private bool m_turretActive;
@@ -75,6 +78,8 @@ namespace Game.Player{
             Ray mouseCast = m_cam.ScreenPointToRay(mousePos);
             if (Physics.Raycast(mouseCast, out var hit, 100)){
                 Vector3 targetPos = new Vector3(hit.point.x, transform.position.y, hit.point.z);
+                m_Crosshairs.position = new Vector3(targetPos.x, m_CrosshairsHeight.position.y, targetPos.z);
+
                 if (!m_turretActive){
                     if (Input.GetKey(KeyCode.Space)){
                         Debug.DrawLine(targetPos, targetPos + Vector3.up, Color.green);

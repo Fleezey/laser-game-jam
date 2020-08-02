@@ -39,7 +39,7 @@ public class GameManager : Singleton<GameManager>
 
     public void GameOver()
     {
-        Debug.Log("Game End");
+        Cursor.visible = true;
         State = GameState.GameOver;
 
         Time.timeScale = 0;
@@ -47,6 +47,7 @@ public class GameManager : Singleton<GameManager>
 
     private void StartGame()
     {
+        Cursor.visible = false;
         State = GameState.Playing;
         Time.timeScale = 1;
         WaveManager.Instance.StartWave();
