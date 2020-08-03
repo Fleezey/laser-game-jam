@@ -1,5 +1,6 @@
 ﻿using Game.Wave;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -7,9 +8,14 @@ public class GameManager : Singleton<GameManager>
 
     public GameState State { get; private set; }
 
+    [Header("UI Elements")]
+    [SerializeField] private GameObject m_StartPanel = null;
+    [SerializeField] private GameObject m_EndPanel = null;
+
     private void Start()
     {
         State = GameState.Init;
+        m_StartPanel.SetActive(true);
         Time.timeScale = 0;
     }
 
@@ -21,6 +27,7 @@ public class GameManager : Singleton<GameManager>
             case GameState.Init:
                 if (Input.GetKeyDown(KeyCode.Return))
                 {
+                    m_StartPanel.SetActive(false);
                     StartGame();
                 }
                 break;
@@ -31,7 +38,7 @@ public class GameManager : Singleton<GameManager>
             case GameState.GameOver:
                 if (Input.GetKeyDown(KeyCode.Return))
                 {
-                    State = GameState.Init;
+                    SceneManager.LoadScene("MainMenu");
                 }
                 break;
         }
@@ -40,8 +47,8 @@ public class GameManager : Singleton<GameManager>
     public void GameOver()
     {
         Cursor.visible = true;
+        m_EndPanel.SetActive(true);
         State = GameState.GameOver;
-
         Time.timeScale = 0;
     }
 

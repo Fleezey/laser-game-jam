@@ -1,13 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     public void PlayGame()
     {
-        Debug.Log("#TODO move to next scene");
-        //SceneManager.LoadScene();
+        SceneManager.LoadScene("SomewhatMerged");
     }
     
     public void QuitGame()
